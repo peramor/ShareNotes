@@ -1,0 +1,130 @@
+﻿@using ShareNotesV3.ViewModels
+@using Microsoft.AspNetCore.Routing;
+
+
+@model FacultyViewModel
+
+@{
+    ViewData["Title"] = "Лекции";
+
+    var markers = new List<int[]>();
+}
+
+@if (Model == null)
+{
+    <div class="jumbotron">
+        <h1>Готовься к экзаменам вместе с однокурсниками</h1>
+        <p>
+            Это очень просто. Твои одногруппники активно делятся своими конспектамии.
+            Все, что тебе нужно - найти свой факультет.
+        </p>
+        <p><a class="btn btn-primary btn-lg" asp-controller="Students" asp-action="Create" role="button">Начнем!</a></p>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4>@Model.Name</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <button onclick="location.href='@Url.Action("Create", "Notes")'" class="btn btn-sm" asp-controller="Notes" asp-action="Create">
+                            <span class="glyphicon glyphicon-pencil" />
+                        </button>
+                    </div>
+                </div>
+
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#lectures">Лекции</a></li>
+                    <li><a data-toggle="tab" href="#markers">Заметки</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="lectures" class="tab-pane fade in active" style="overflow-y: scroll; overflow-x: hidden; height: 500px; border: ridge;">
+                        <ul class="nav nav-list list-group">
+                            @foreach (var item in Model.Courses)
+                            {
+                                <li class="list-group-item">
+
+                                    <label label-default="" class="tree-toggle" nav-header">
+                                        @item.Name
+                                        <span class="label label-default">@item.Lectures.Count()</span>
+                                    </label>
+
+                                    <ul class="nav nav-list tree">
+                                        @foreach (var lecture in item.Lectures)
+                                        {
+                                            <li>
+                                                <label label-default="" class="tree-toggle nav-header text-info">@lecture.Topic</label>
+                                                <ul class="nav nav-list tree">
+                                                    @for (int i = 0; i < lecture.Notes.Count; i++)
+                                                    {
+                                                        var label = "label-info";
+
+                                                        if (i == 0)
+                                                        {
+                                                            label = "label-warning";
+                                                        }
+
+                                                        <li>
+                                                            <a href='@Url.Action("About", "Home", new { id = lecture.Notes[i].NoteId })' target="NoteFrame">
+                                                                @lecture.Notes[i].StudentName
+                                                                <span class="label @label">
+                                                                    @lecture.Notes[i].Rating
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </li>
+                                        }
+                                    </ul>
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div id="markers" class="tab-pane fade" style="overflow-y: scroll; overflow-x: hidden; height: 500px; border: ridge;">
+                        <ul class="nav nav-list list-group">
+                            @foreach (var course in Model.Courses)
+                            {
+                                <li class="list-group-item">
+
+                                    <label label-default="" class="tree-toggle" nav-header">
+                                        @course.Name
+                                        <span class="label label-default">@course.Lectures.Count()</span>
+                                    </label>
+
+                                    <ul class="nav nav-list tree">
+                                        @foreach (var lecture in course.Lectures)
+                                        {
+                                            <li>
+                                                <a href='@Url.Action("Index", "Markers", new { lectureId = lecture.LectureId })' target="NoteFrame">
+                                                    @lecture.Topic
+                                                    <span class="label label-default">@lecture.Notes.Sum(n => n.Markers.Count)</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-9" style="overflow-y: hidden; overflow-x: hidden; height: 88vh;
+                 border-style: ridge; background-color: darkgrey;">
+                <iframe name="NoteFrame" width="100%"
+                        height="100%" frameBorder="0">
+                    Ваш браузер не поддерживает плавающие фреймы!
+                </iframe>
+            </div>
+        </div>
+    </div>
+}

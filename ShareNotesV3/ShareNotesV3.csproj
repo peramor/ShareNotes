@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\js\fileinput.js" />
+    <Content Include="wwwroot\js\fileinput.min.js" />
+    <Content Include="wwwroot\js\locales\ar.js" />
+    <Content Include="wwwroot\js\locales\bg.js" />
+    <Content Include="wwwroot\js\locales\ca.js" />
+    <Content Include="wwwroot\js\locales\cr.js" />
+    <Content Include="wwwroot\js\locales\cz.js" />
+    <Content Include="wwwroot\js\locales\da.js" />
+    <Content Include="wwwroot\js\locales\de.js" />
+    <Content Include="wwwroot\js\locales\el.js" />
+    <Content Include="wwwroot\js\locales\es.js" />
+    <Content Include="wwwroot\js\locales\et.js" />
+    <Content Include="wwwroot\js\locales\fa.js" />
+    <Content Include="wwwroot\js\locales\fi.js" />
+    <Content Include="wwwroot\js\locales\fr.js" />
+    <Content Include="wwwroot\js\locales\gl.js" />
+    <Content Include="wwwroot\js\locales\hu.js" />
+    <Content Include="wwwroot\js\locales\id.js" />
+    <Content Include="wwwroot\js\locales\it.js" />
+    <Content Include="wwwroot\js\locales\ja.js" />
+    <Content Include="wwwroot\js\locales\kr.js" />
+    <Content Include="wwwroot\js\locales\kz.js" />
+    <Content Include="wwwroot\js\locales\LANG.js" />
+    <Content Include="wwwroot\js\locales\nl.js" />
+    <Content Include="wwwroot\js\locales\no.js" />
+    <Content Include="wwwroot\js\locales\pl.js" />
+    <Content Include="wwwroot\js\locales\pt-BR.js" />
+    <Content Include="wwwroot\js\locales\pt.js" />
+    <Content Include="wwwroot\js\locales\ro.js" />
+    <Content Include="wwwroot\js\locales\ru.js" />
+    <Content Include="wwwroot\js\locales\sk.js" />
+    <Content Include="wwwroot\js\locales\sl.js" />
+    <Content Include="wwwroot\js\locales\sv.js" />
+    <Content Include="wwwroot\js\locales\th.js" />
+    <Content Include="wwwroot\js\locales\tr.js" />
+    <Content Include="wwwroot\js\locales\uk.js" />
+    <Content Include="wwwroot\js\locales\vi.js" />
+    <Content Include="wwwroot\js\locales\zh-TW.js" />
+    <Content Include="wwwroot\js\locales\zh.js" />
+    <Content Include="wwwroot\js\plugins\piexif.js" />
+    <Content Include="wwwroot\js\plugins\piexif.min.js" />
+    <Content Include="wwwroot\js\plugins\purify.js" />
+    <Content Include="wwwroot\js\plugins\purify.min.js" />
+    <Content Include="wwwroot\js\plugins\sortable.js" />
+    <Content Include="wwwroot\js\plugins\sortable.min.js" />
+    <Content Include="wwwroot\js\site.js" />
+    <Content Include="wwwroot\js\site.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" />
+    <PackageReference Include="WindowsAzure.Storage" Version="8.1.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Markers\" />
+  </ItemGroup>
+
+</Project>

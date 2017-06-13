@@ -1,0 +1,9 @@
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\bin\Debug\netcoreapp1.1\ShareNotesV3.deps.json
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\bin\Debug\netcoreapp1.1\ShareNotesV3.runtimeconfig.json
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\bin\Debug\netcoreapp1.1\ShareNotesV3.runtimeconfig.dev.json
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\bin\Debug\netcoreapp1.1\ShareNotesV3.dll
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\bin\Debug\netcoreapp1.1\ShareNotesV3.pdb
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\obj\Debug\netcoreapp1.1\ShareNotesV3.AssemblyInfo.cs
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\obj\Debug\netcoreapp1.1\ShareNotesV3.dll
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\obj\Debug\netcoreapp1.1\ShareNotesV3.pdb
+D:\docs\hse\2 course\Course work\ShareNotesV3\ShareNotesV3\obj\Debug\netcoreapp1.1\ShareNotesV3.csprojResolveAssemblyReference.cache

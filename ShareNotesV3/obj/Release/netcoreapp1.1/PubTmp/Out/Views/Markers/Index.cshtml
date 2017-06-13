@@ -1,0 +1,34 @@
+﻿@model List<ShareNotesV3.ViewModels.MarkerViewModel>
+@{
+    ViewData["Title"] = "Note";
+    Layout = "~/Views/Shared/EmptyLayour.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-10">
+        <h3>@Model.Count заметок по теме</h3>
+        @foreach (var item in Model)
+        {
+            string height = item.EndY - item.StartY + "px";
+            string margin = "-" + item.StartY + "px";
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-11">
+                            @item.Label
+                        </div>
+                        <div class="col-xs-1">
+                            <button type="button" onclick="location.href='@Url.Action("About","Home",new { id = @item.NoteId })'"  
+                                    class="btn btn-xs"><span class="glyphicon glyphicon-menu-right"/></button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div style="overflow:hidden; height: @height">
+                    <img style="width: 100%; margin-top: @margin;" src="@item.Document" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,134 @@
+﻿@model ShareNotesV3.ViewModels.NoteViewModel
+
+@{
+    ViewData["Title"] = "Note";
+    Layout = "~/Views/Shared/EmptyLayour.cshtml";
+}
+
+@if (Model.Document != null)
+{
+    <div class="row">
+        <div class="col-xs-10">
+            <img id="lecture_note1" class="lecture_note" src=@Model.Document
+                 style="width: 100%;"
+                 onmousedown="down_func(this); return false;" onmouseup="up(this);" />
+        </div>
+        <div id="right-panel" class="col-xs-2">
+            <div style="position: absolute; left: 5px; width:150px; z-index:1;">
+                <p style="position: relative; left: 0px; top:2px"><span class="glyphicon glyphicon-eye-open"></span> @Model.Views </p>
+                <p style="position: absolute; left: 60px; top: 2px" id="RateAverage"> <span class="glyphicon glyphicon-thumbs-up"></span> @Model.Rating</p>
+                <label label-default="" class="tree-toggle text-danger" nav-header" style="cursor: pointer;">
+                    Rate
+                    <span id="ChosenRate" class="badge">!</span>
+                </label>
+                <ul class="nav nav-list tree">
+                    @for (int i = 10; i >= 4; i--)
+                    {
+                        <li style="cursor: pointer;">
+                            <span class="badge" onclick="setRate(this);">@i</span>
+                        </li>
+                    }
+                </ul>
+                <p id="status" />
+            </div>
+            <canvas id="canvas" style="position: relative; left: -30px;" />
+        </div>
+    </div>
+}
+
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var startY = 0, endY = 0;
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("lecture_note1");
+    var crop = document.getElementById("crop");
+    var cropped = document.getElementById("cropped");
+    var n = 1;
+
+    var markers = @Html.Raw(Json.Serialize(Model.Markers))
+    markers.forEach(function(item, i, arr) {
+        draw(item.startY, item.endY, item.label, item.markerId)
+    });
+
+    function draw(stY, enY, tit, markerId){
+        if (c.height != img.height)
+            c.height = img.height;
+        ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
+        ctx.beginPath();
+        ctx.moveTo(0,stY);
+        ctx.lineTo(20,stY);
+        ctx.lineTo(0,enY);
+        ctx.fill();
+        var btn = $('<button id="' + markerId + '" onclick="del(this)" class="btn btn-default btn-xs">'+tit+' <b>x</b></button>');
+        btn.css("position","absolute").css("top", stY + "px").css("left","0px")
+            .css("margin-left","-15px");
+        $('#right-panel').append(btn);
+    }
+
+    function down_func(e){
+        if (c.height != img.height)
+            c.height = img.height;
+
+        img.style.cursor = "s-resize";
+        startY = e.Y;
+    }
+
+    function up(e){
+        img.style.cursor = "default";
+        endY = e.Y;
+
+        if (Math.abs(endY-startY) < 100)
+            return;
+
+        var title = prompt('Название заметки:', "заметка " + n);
+        if (title === null || title === "")
+            return;
+        if (title === "заметка " + n) n++;
+
+        $.post('@Url.Action("Create", "Markers")', {startY: startY, endY: endY, noteId: @Model.NoteId, label: title})
+        .done(function(response,status,jqxhr){
+            // return markerId
+            console.log(response);
+            draw(startY, endY, title, response.markerId);
+        })
+        .fail(function(jqxhr, status, error){
+            alert(error);
+        })
+    }
+
+    function setRate(e){
+        var r = $(e).text();
+
+        $.post('@Url.Action("Rate", "Views")', {rate: r, noteId: @Model.NoteId})
+        .done(function(response,status,jqxhr){
+            $('#ChosenRate').text(r);
+            console.log(response);
+            $('#RateAverage').html('<span class="glyphicon glyphicon-thumbs-up"></span> ' + response.average.toFixed(1));
+        })
+        .fail(function(jqxhr, status, error){
+            alert(error);
+        });
+
+        hide();
+    }
+
+    function del(e){
+        $.post('@Url.Action("Delete", "Markers")', {markerId: e.id})
+        .done(function(response,status,jqxhr){
+            console.log('delte');
+            console.log(e.id);
+            $(e).text('удалено');
+            $(e).removeClass('btn-default');
+            $(e).addClass('btn-danger');
+        })
+        .fail(function(jqxhr, status, error){
+            alert(error);
+        });
+    }
+
+    function hide(){
+        $('label.tree-toggle').parent().children('ul.tree').hide(200);
+    }
+</script>

@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="ShareNotes" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\docs\\hse\\2\ course\\Course\ work\\ShareNotesV3\\ShareNotesV3\\obj\\Release\\netcoreapp1\.1\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>
